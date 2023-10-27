@@ -246,8 +246,8 @@ ssh bandit21@bandit.labs.overthewire.org -p 2220
 ```
 
 ### References
-[1] Oli (2013-10-13). [“computerhope - What does "./” mean in linux shell?"](https://www.computerhope.com/unix/ucrontab.htm)
+[1] Oli (2013-10-13). [“computerhope - Linux crontab command"](https://www.computerhope.com/unix/ucrontab.htm)
 
-When I intuitively `data.txt`.
+after viewing all the jobs running in `cron.d`, I `cat`ed `cronjob_bandit22` only to be told that there is a shell script by the same name being executed, which I again `cat`ed, revealing that it is creating a file named `t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv` in the `tmp` directory.
 
 # ---Pulkit Kumar (buddywhitman)
