@@ -246,8 +246,8 @@ ssh bandit21@bandit.labs.overthewire.org -p 2220
 ```
 
 ### References
-https://www.computerhope.com/unix/ucrontab.htm?source=post_page-----6cb782b4b17b--------------------------------
+[1] Oli (2013-10-13). [“computerhope - What does "./” mean in linux shell?"](https://www.computerhope.com/unix/ucrontab.htm)
 
-When I intuitively tried `base64 data.txt`, I realised that there must be an option to be used and thus, I learnt about `-decode` from the cited source and used it to decode `data.txt`.
+When I intuitively `data.txt`.
 
 # ---Pulkit Kumar (buddywhitman)
