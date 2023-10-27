@@ -231,7 +231,7 @@ I setup a listener running in the background using `nc -lp &` on a random port `
 
 # Level 21
 
-## Cronjobs
+## Viewing cronjob details
 
 ### Solution
 ```
