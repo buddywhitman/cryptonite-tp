@@ -1,2 +1,0 @@
-# PicoCTF
-## Coming Soon!
