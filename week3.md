@@ -160,12 +160,12 @@ for i in x:
     
 `
 ### Flag
-`R0UND_N_R0UND_B6B25531`
+`picoCTF{R0UND_N_R0UND_B6B25531}`
 
 
 ## miniRSA
 ### Solution
-On opening the given file with wireshark, I first exported the exchanged files and decided to read each one of them. I deciphered `instructions.txt` first, realising that it was a `ROT13` cipher and hence, similarly, decoded `plan` to reveal that the `DUEDILIGENCE	` 	was some sort of a password. I decided to use `steghide` on every exported image in the directory and finally found the required flag in `picture3.bmp`.
+I read that without padding, the encryption of `m` is basically `(m^e)%n`.  I created a script to automate the process of decoding `ascii` values of the computed integers while decoding the given cipher text and to decide the padding depending on whether the decoded message matched `pico` at all.
 
 ### Flag
-`picoCTF{h1dd3n_1n_pLa1n_51GHT_18375919}`
+`picoCTF{n33d_a_lArg3r_e_606ce004}`
