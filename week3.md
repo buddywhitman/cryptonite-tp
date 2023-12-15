@@ -127,10 +127,10 @@ Upon inspection of the source file, I found that the `strcpy` used a 100-long bu
 
 ## babygame01
 ### Solution
-I basically just won the game by reaching the end tile first by spamming `w`, then I proceeded
+I opened the game in ghidra and realised that `p` could be used to traverse immediately to x but only resulted in a `"You Win!"` without the flag. After playing around for a while, I discovered that going back four positions from the top-leftmost visible position changes the value of `flag` to `64` after which I pressed `p` to win the game and retrieve the flag.
 
 ### Flag
-`picoCTF{D1d_u_kn0w_ppts_r_z1p5}`
+`picoCTF{gamer_m0d3_enabled_8985ce0e}`
 
 
 
