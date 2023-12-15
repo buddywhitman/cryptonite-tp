@@ -7,3 +7,6 @@ The OverTheWire Bandit Lab's writeup for Levels 0-11 can be found [here](https:/
 
 ### Week 2
 The OverTheWire Bandit Lab's writeup for Levels 12-21 can be found [here](https://github.com/buddywhitman/cryptonite-tp/blob/main/week2.md)
+
+### Week 2
+The PicoCTF's writeup for the assigned challenges can be found [here](https://github.com/buddywhitman/cryptonite-tp/blob/main/week3.md)
